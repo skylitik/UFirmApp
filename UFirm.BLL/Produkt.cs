@@ -9,17 +9,24 @@ namespace UFirm.BLL
     /// </summary>
     public class Produkt
     {
+        public const double CaliNaMetr = 38.87;
+        public readonly decimal MinimalnaCena;
         #region Konstruktory
         public Produkt()
         {
             Console.WriteLine("Produkt został utworzony");
             //this.DostawcaProduktu = new Dostawca();
+            this.MinimalnaCena = 10.50m;
         }
         public Produkt(int produktId, string nazwaProduktu, string opis) : this()
         {
             this.ProduktID = produktId;
             this.NazwaProduktu = nazwaProduktu;
             this.Opis = opis;
+            if (nazwaProduktu.StartsWith("Krzesło"))
+            {
+                this.MinimalnaCena = 120.99m;
+            }
             Console.WriteLine("Produkt ma nazwe: " + nazwaProduktu);
             
         }
@@ -37,7 +44,12 @@ namespace UFirm.BLL
 
         public string NazwaProduktu
         {
-            get { return nazwaProduktu; }
+            get
+            {
+                var przecinakProduktu = nazwaProduktu?.Trim();
+
+                return przecinakProduktu; 
+            }
             set { nazwaProduktu = value; }
         }
         private string opis;
@@ -61,6 +73,14 @@ namespace UFirm.BLL
             }
             set { dostawcaProduktu = value; }
         }
+        private DateTime? dataDostepnosci;
+
+        public DateTime? DateDostepnosci
+        {
+            get { return dataDostepnosci; }
+            set { dataDostepnosci = value; }
+        }
+
 
         #endregion
         public string PowiedzWitaj()
@@ -71,8 +91,9 @@ namespace UFirm.BLL
             var emailServices = new EmailService();
             var potwierdzenie = emailServices.WyslijWiadomosc("Nowy produkt", this.NazwaProduktu, "ufirm@gmail.com");
             var wynik = Logowanie("Powiedziano Witaj");
+            
 
-            return "Witaj " + NazwaProduktu + " (" + ProduktID + "): " + Opis;
+            return "Witaj " + NazwaProduktu + " (" + ProduktID + "): " + Opis + " Dostępny od: " + DateDostepnosci?.ToShortDateString();
         }
     }
 }
