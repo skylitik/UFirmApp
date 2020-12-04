@@ -1,4 +1,6 @@
 ﻿using System;
+using Ufirm.Common;
+using static Ufirm.Common.LogowanieService;
 
 namespace UFirm.BLL
 {
@@ -7,9 +9,11 @@ namespace UFirm.BLL
     /// </summary>
     public class Produkt
     {
+        #region Konstruktory
         public Produkt()
         {
             Console.WriteLine("Produkt został utworzony");
+            //this.DostawcaProduktu = new Dostawca();
         }
         public Produkt(int produktId, string nazwaProduktu, string opis) : this()
         {
@@ -19,6 +23,9 @@ namespace UFirm.BLL
             Console.WriteLine("Produkt ma nazwe: " + nazwaProduktu);
             
         }
+        #endregion
+
+        #region Pola i wlaściwości
         private int produktId;
 
         public int ProduktID
@@ -40,8 +47,31 @@ namespace UFirm.BLL
             get { return opis; }
             set { opis = value; }
         }
+        private Dostawca dostawcaProduktu;
+
+        public Dostawca DostawcaProduktu
+        {
+            get 
+            {
+                if (dostawcaProduktu == null)
+                {
+                    dostawcaProduktu = new Dostawca();
+                }
+                return dostawcaProduktu; 
+            }
+            set { dostawcaProduktu = value; }
+        }
+
+        #endregion
         public string PowiedzWitaj()
         {
+            //var dostawca = new Dostawca();
+           // dostawca.WysliEmailWitamy("Wiadomość z produktu");
+
+            var emailServices = new EmailService();
+            var potwierdzenie = emailServices.WyslijWiadomosc("Nowy produkt", this.NazwaProduktu, "ufirm@gmail.com");
+            var wynik = Logowanie("Powiedziano Witaj");
+
             return "Witaj " + NazwaProduktu + " (" + ProduktID + "): " + Opis;
         }
     }

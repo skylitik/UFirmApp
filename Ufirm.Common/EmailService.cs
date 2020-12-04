@@ -14,8 +14,8 @@
             //Kod, aby wyslac wiadomosc email
 
             var potwierdzenie = "Wiadomość wyslana: " + temat;
-            var logowanieService = new LogowanieService();
-            logowanieService.Logowanie(potwierdzenie);
+           
+            LogowanieService.Logowanie(potwierdzenie);
 
             return potwierdzenie;
         }

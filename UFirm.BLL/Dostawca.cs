@@ -7,10 +7,11 @@ namespace UFirm.BLL
     /// </summary>
     public class Dostawca
     {
+        #region Pola i właściwości
         public int DostawcaId { get; set; }
         public string NazwaFirmy { get; set; }
         public string Email { get; set; }
-
+        #endregion
         /// <summary>
         /// Wysyla wiadomosc email, aby powiatc nowego dostawce
         /// </summary>

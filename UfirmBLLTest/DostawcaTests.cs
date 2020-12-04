@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UFirm.BLL;
 
-namespace UfirmBLLTest
+namespace Ufirm.BLL.Test
 {
     [TestClass]
-    public class DostawcaTesty
+    public class DostawcaTests
     {
         [TestMethod]
         public void WyslijEmailWitamy_PrawidlowaNazwaFirmy_Sukces()

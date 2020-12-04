@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UFirm.BLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UFirm.BLL.Tests
+namespace UFirm.BLL.Test
 {
     [TestClass()]
     public class ProduktTests
@@ -19,6 +13,7 @@ namespace UFirm.BLL.Tests
             produkt.ProduktID = 1;
             produkt.NazwaProduktu = "Biurko";
             produkt.Opis = "Czarne biurko";
+            produkt.DostawcaProduktu.NazwaFirmy = "UFirm dostawca";
 
             var oczekiwana = "Witaj Biurko (1): Czarne biurko";
 
@@ -29,7 +24,7 @@ namespace UFirm.BLL.Tests
             Assert.AreEqual(oczekiwana, aktualna);
         }
         [TestMethod()]
-        public void PowiedzWitajSparametryzowanyKonstruktorTest()
+        public void PowiedzWitaj_SparametryzowanyKonstruktorTest()
         {
             //Arrange
             var produkt = new Produkt(1, "Biurko", "Czarne biurko");      
@@ -37,6 +32,26 @@ namespace UFirm.BLL.Tests
             var oczekiwana = "Witaj Biurko (1): Czarne biurko";
 
              //Act
+            var aktualna = produkt.PowiedzWitaj();
+
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+        [TestMethod()]
+        public void PowiedzWitaj_InicjalizatorObiektuTest()
+        {
+            //Arrange
+            var produkt = new Produkt
+            {
+                ProduktID = 1,
+                NazwaProduktu = "Biurko",
+                Opis = "Czarne Biurko"
+            };
+
+
+            var oczekiwana = "Witaj Biurko (1): Czarne Biurko";
+
+            //Act
             var aktualna = produkt.PowiedzWitaj();
 
             //Assert
