@@ -17,6 +17,7 @@ namespace UFirm.BLL
             Console.WriteLine("Produkt został utworzony");
             //this.DostawcaProduktu = new Dostawca();
             this.MinimalnaCena = 10.50m;
+            this.Kategoria = "Informatyka";
         }
         public Produkt(int produktId, string nazwaProduktu, string opis) : this()
         {
@@ -47,10 +48,23 @@ namespace UFirm.BLL
             get
             {
                 var przecinakProduktu = nazwaProduktu?.Trim();
-
                 return przecinakProduktu; 
             }
-            set { nazwaProduktu = value; }
+            set
+            {
+                if (value.Length < 4)
+                {
+                    Wiadomoscz = "Nazwa produktu musi być dłuszcza niż 4 znaki";
+                }
+                else if (value.Length > 30)
+                {
+                    Wiadomoscz = "Nazwa produktu musi być krótsza niż 30 znaków";
+                }
+                else
+                {
+                    nazwaProduktu = value;
+                }
+            }
         }
         private string opis;
 
@@ -80,6 +94,10 @@ namespace UFirm.BLL
             get { return dataDostepnosci; }
             set { dataDostepnosci = value; }
         }
+
+        public string Wiadomoscz { get; private set; }
+        internal string Kategoria { get; set; }
+        public int Numer { get; set; } = 1;
 
 
         #endregion

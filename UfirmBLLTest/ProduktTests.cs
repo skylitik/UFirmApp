@@ -123,5 +123,103 @@ namespace UFirm.BLL.Test
             //Assert
             Assert.AreEqual(oczekiwana, aktualna);
         }
+        [TestMethod()]
+        public void NazwaProduktu_ZakorkaTest()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.NazwaProduktu = "Krz";
+            string oczekiwana = null;
+            string oczekiwanaWiadomosc = "Nazwa produktu musi być dłuszcza niż 4 znaki";
+
+            //Act
+            var aktualna = produkt.NazwaProduktu;
+            var aktualnaWiadomosc = produkt.Wiadomoscz;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+            Assert.AreEqual(oczekiwanaWiadomosc, aktualnaWiadomosc);
+        }
+        [TestMethod()]
+        public void NazwaProduktu_ZadlugaTest()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.NazwaProduktu = "Krzeszło obrotowe zbyt długa nazwa";
+            string oczekiwana = null;
+            string oczekiwanaWiadomosc = "Nazwa produktu musi być krótsza niż 30 znaków";
+
+            //Act
+            var aktualna = produkt.NazwaProduktu;
+            var aktualnaWiadomosc = produkt.Wiadomoscz;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+            Assert.AreEqual(oczekiwanaWiadomosc, aktualnaWiadomosc);
+        }
+        [TestMethod()]
+        public void NazwaProduktu_PrawidlowaTest()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.NazwaProduktu = "Krzesło obrotowe";
+            string oczekiwana = "Krzesło obrotowe";
+            string oczekiwanaWiadomosc = null;
+
+            //Act
+            var aktualna = produkt.NazwaProduktu;
+            var aktualnaWiadomosc = produkt.Wiadomoscz;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+            Assert.AreEqual(oczekiwanaWiadomosc, aktualnaWiadomosc);
+        }
+        [TestMethod()]
+        public void Kategoria_warosczDomyslnaTest()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            string oczekiwana = "Informatyka";
+
+            //Act
+            var aktualna = produkt.Kategoria;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+        [TestMethod()]
+        public void Kategoria_nowaWartosc()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.Kategoria = "Geografia";
+            var oczekiwana = "Geografia";
+
+            //Act
+            var aktualna = produkt.Kategoria;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+        [TestMethod()]
+        public void Numer_WartoszcDomyslnaTest()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            var oczekiwana = 1;
+
+            //Act
+            var aktualna = produkt.Numer;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+        [TestMethod()]
+        public void Numer_NowaWartosc()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.Numer = 400;
+            var oczekiwana = 400;
+
+            //Act
+            var aktualna = produkt.Numer;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
     }
 }
