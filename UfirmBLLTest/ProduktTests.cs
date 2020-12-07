@@ -221,5 +221,32 @@ namespace UFirm.BLL.Test
             //Assert
             Assert.AreEqual(oczekiwana, aktualna);
         }
+        [TestMethod()]
+        public void WartoscDomyslna_Test()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            
+            var oczekiwana = "Informatyka - 1";
+
+            //Act
+            var aktualna = produkt.KodProduktu;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+        [TestMethod()]
+        public void KodProduktuNowaWartosc_Test()
+        {
+            //Arrange
+            var produkt = new Produkt();
+            produkt.Kategoria = "Historia";
+            produkt.Numer = 10;
+            var oczekiwana = "Historia - 10";
+
+            //Act
+            var aktualna = produkt.KodProduktu;
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
     }
 }
