@@ -100,6 +100,7 @@ namespace UFirm.BLL
         public int Numer { get; set; } = 1;
 
         public string KodProduktu => this.Kategoria + " - " + this.Numer;
+        public decimal Koszt { get; set; }
         #endregion
         public string PowiedzWitaj()
         {
@@ -113,5 +114,12 @@ namespace UFirm.BLL
 
             return "Witaj " + NazwaProduktu + " (" + ProduktID + "): " + Opis + " Dostępny od: " + DateDostepnosci?.ToShortDateString();
         }
+        /// <summary>
+        /// Oblicza sugerowaną cene detaliczną produktu
+        /// </summary>
+        /// <param name="procent">Procent uywany do wyliczenia sugerowanej ceny detalicznej</param>
+        /// <returns></returns>
+        public decimal obliczSugerowanaCena(decimal procent) => this.Koszt + (this.Koszt * procent / 100);        
+        public override string ToString() => this.nazwaProduktu + " ("+ this.produktId + ")"; 
     }
 }

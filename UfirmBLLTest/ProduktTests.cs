@@ -1,4 +1,25 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using UFirm.BLL;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace UFirm.BLL.Tests
+{
+    [TestClass()]
+    public class ProduktTests
+    {
+        [TestMethod()]
+        public void obliczSugerowanaCenaTest()
+        {
+            //Arrange
+            var produkt = new Produkt(1, "Biurko", "opis");
+            produkt.Koszt = 200m;
+            var oczekiwana = 220m;
+            //Act
+            var aktualna = produkt.obliczSugerowanaCena(10);
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
+        }
+    }
+}
 
 namespace UFirm.BLL.Test
 {

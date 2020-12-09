@@ -66,6 +66,36 @@ namespace Ufirm.BLL.Test
             Assert.AreEqual(oczekiwana.Wiadomosc, aktualna.Wiadomosc);
         }
         [TestMethod()]
+        public void ZlozZamowienie3ParametryTest()
+        {
+            //Arrange
+            var dostawca = new Dostawca();
+            var produkt = new Produkt(1, "Biurko", "opis");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nData dostawy: 09.12.2020");
+
+            //Act
+            var aktualna = dostawca.ZlozZamowienie(produkt, 15, new DateTimeOffset(2020,12,09,0,0,0, new TimeSpan(8,0,0)));
+
+            //Assert
+            Assert.AreEqual(oczekiwana.Sukces, aktualna.Sukces);
+            Assert.AreEqual(oczekiwana.Wiadomosc, aktualna.Wiadomosc);
+        }
+        [TestMethod()]
+        public void ZlozZamowienie4ParametryTest()
+        {
+            //Arrange
+            var dostawca = new Dostawca();
+            var produkt = new Produkt(1, "Biurko", "opis");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nData dostawy: 09.12.2020\r\nInstrukcja: testowa instrukcja");
+
+            //Act
+            var aktualna = dostawca.ZlozZamowienie(produkt, 15, new DateTimeOffset(2020, 12, 09, 0, 0, 0, new TimeSpan(8, 0, 0)), "testowa instrukcja");
+
+            //Assert
+            Assert.AreEqual(oczekiwana.Sukces, aktualna.Sukces);
+            Assert.AreEqual(oczekiwana.Wiadomosc, aktualna.Wiadomosc);
+        }
+        [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ZlozZamowienie_NullProdukt_ExceptionTest()
         {
