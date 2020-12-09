@@ -8,6 +8,8 @@ namespace UFirm.BLL
     /// </summary>
     public class Dostawca
     {
+        public enum DolaczAdres { Tak, Nie};
+        public enum WyslijKopie { Tak, Nie};
         #region Pola i właściwości
         public int DostawcaId { get; set; }
         public string NazwaFirmy { get; set; }
@@ -33,31 +35,10 @@ namespace UFirm.BLL
         /// </summary>
         /// <param name="produkt">Produkt do zamówienia</param>
         /// <param name="ilosc">Ilość do zamówienia</param>
-        /// <returns></returns>
-        public WynikOperacji ZlozZamowienie(Produkt produkt, int ilosc)
-        {
-            return ZlozZamowienie(produkt, ilosc, null, null);
-        }
-        /// <summary>
-        /// Wysyla zamówienie na produkt do dostawcy
-        /// </summary>
-        /// <param name="produkt">Produkt do zamówienia</param>
-        /// <param name="ilosc">Ilość do zamówienia</param>
-        /// <param name="data">Data dostawy zamówienia</param>
-        /// <returns></returns>
-        public WynikOperacji ZlozZamowienie(Produkt produkt, int ilosc, DateTimeOffset? data)
-        {
-            return ZlozZamowienie(produkt, ilosc, data, null);
-        }
-        /// <summary>
-        /// Wysyla zamówienie na produkt do dostawcy
-        /// </summary>
-        /// <param name="produkt">Produkt do zamówienia</param>
-        /// <param name="ilosc">Ilość do zamówienia</param>
         /// <param name="data">Data dostawy zamówienia</param>
         /// <param name="instrukcje">Instrukcja dostawy</param>
         /// <returns></returns>
-        public WynikOperacji ZlozZamowienie(Produkt produkt, int ilosc, DateTimeOffset? data, string instrukcje)
+        public WynikOperacji ZlozZamowienie(Produkt produkt, int ilosc, DateTimeOffset? data = null, string instrukcje = "Standardowa dostawa")
         {
             if (produkt == null)
                 throw new ArgumentNullException(nameof(produkt));
@@ -84,6 +65,24 @@ namespace UFirm.BLL
             var wynikOperacji = new WynikOperacji(sukces, tekstZamowienia);
 
 
+            return wynikOperacji;
+        }
+        /// <summary>
+        /// Wysyla zamówienie na produkt do dostawcy.
+        /// </summary>
+        /// <param name="produkt">Produkt do zamowienia</param>
+        /// <param name="ilosc">Ilosc prosuktu do zamówienia</param>
+        /// <param name="dolaczAdres">True, jeśli zawiera adres wysyłki</param>
+        /// <param name="wyslijKopie">True, jeśli wysyłamy kopie wiadomosci e-mail</param>
+        /// <returns>Flaga sukcesu i tekst zamówienia</returns>
+        public WynikOperacji ZlozZamowienie(Produkt produkt, int ilosc, DolaczAdres dolaczAdres, WyslijKopie wyslijKopie)
+        {
+            var tekstZamowienia = "Tekst zamówienia";
+            if (dolaczAdres == DolaczAdres.Tak)
+                tekstZamowienia += " Dołączamy adres";
+            if (wyslijKopie == WyslijKopie.Tak)
+                tekstZamowienia += " Wysyłamy kopie";
+            var wynikOperacji = new WynikOperacji(true, tekstZamowienia);
             return wynikOperacji;
         }
             #endregion
