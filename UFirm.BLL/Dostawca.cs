@@ -8,8 +8,8 @@ namespace UFirm.BLL
     /// </summary>
     public class Dostawca
     {
-        public enum DolaczAdres { Tak, Nie};
-        public enum WyslijKopie { Tak, Nie};
+        public enum DolaczAdres { Tak, Nie };
+        public enum WyslijKopie { Tak, Nie };
         #region Pola i właściwości
         public int DostawcaId { get; set; }
         public string NazwaFirmy { get; set; }
@@ -85,6 +85,34 @@ namespace UFirm.BLL
             var wynikOperacji = new WynikOperacji(true, tekstZamowienia);
             return wynikOperacji;
         }
-            #endregion
+        public override string ToString()
+        {
+            string dostawcaInfo = "Dostawca: " + this.NazwaFirmy;
+            string wynik = dostawcaInfo?.ToLower();
+            wynik = dostawcaInfo?.ToUpper();
+            wynik = dostawcaInfo?.Replace("Dostawca", "Odbiorca");
+            var dlugosc = dostawcaInfo?.Length;
+            var index = dostawcaInfo?.IndexOf(":");
+            var start = dostawcaInfo?.StartsWith("Dosta");
+            var stop = dostawcaInfo?.EndsWith("ca");
+            var trump = dostawcaInfo?.Trim();
+
+            return dostawcaInfo;
         }
+        public string ZwrocTekst()
+        {
+            var tekst = @"Wstawiam \r\n nowa linia";
+            return tekst;
+        }
+        public string ZwrocTekstDwieLinie()
+        {
+            var tekst = "Pierwsza linia" + Environment.NewLine + "Druga linia";
+            var tekst2 = "Pirwsza linia\r\nDruga linia";
+            var tekst3 = @"Pierwsza linia
+Druga linia";
+            return tekst;
+        }
+        #endregion
+
+    }
 }

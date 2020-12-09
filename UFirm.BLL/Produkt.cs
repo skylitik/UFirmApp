@@ -29,7 +29,7 @@ namespace UFirm.BLL
                 this.MinimalnaCena = 120.99m;
             }
             Console.WriteLine("Produkt ma nazwe: " + nazwaProduktu);
-            
+
         }
         #endregion
 
@@ -48,7 +48,7 @@ namespace UFirm.BLL
             get
             {
                 var przecinakProduktu = nazwaProduktu?.Trim();
-                return przecinakProduktu; 
+                return przecinakProduktu;
             }
             set
             {
@@ -77,13 +77,13 @@ namespace UFirm.BLL
 
         public Dostawca DostawcaProduktu
         {
-            get 
+            get
             {
                 if (dostawcaProduktu == null)
                 {
                     dostawcaProduktu = new Dostawca();
                 }
-                return dostawcaProduktu; 
+                return dostawcaProduktu;
             }
             set { dostawcaProduktu = value; }
         }
@@ -99,7 +99,7 @@ namespace UFirm.BLL
         internal string Kategoria { get; set; }
         public int Numer { get; set; } = 1;
 
-        public string KodProduktu => this.Kategoria + " - " + this.Numer;
+        public string KodProduktu => String.Format("{0} - {1:0000}", this.Kategoria, this.Numer);
         public decimal Koszt { get; set; }
         #endregion
         public string PowiedzWitaj()

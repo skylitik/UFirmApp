@@ -56,7 +56,7 @@ namespace UFirm.BLL.Tests
             //Arrange
             var dostawca = new Dostawca();
             var produkt = new Produkt(1, "Biurko", "opis");
-            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nInstrukcja: Standardowa dostawa");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 0001\r\nIlość: 15\r\nInstrukcja: Standardowa dostawa");
 
             //Act
             var aktualna = dostawca.ZlozZamowienie(produkt, 15);
@@ -71,7 +71,7 @@ namespace UFirm.BLL.Tests
             //Arrange
             var dostawca = new Dostawca();
             var produkt = new Produkt(1, "Biurko", "opis");
-            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nData dostawy: 09.12.2020\r\nInstrukcja: Standardowa dostawa");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 0001\r\nIlość: 15\r\nData dostawy: 09.12.2020\r\nInstrukcja: Standardowa dostawa");
 
             //Act
             var aktualna = dostawca.ZlozZamowienie(produkt, 15, new DateTimeOffset(2020, 12, 09, 0, 0, 0, new TimeSpan(8, 0, 0)));
@@ -86,7 +86,7 @@ namespace UFirm.BLL.Tests
             //Arrange
             var dostawca = new Dostawca();
             var produkt = new Produkt(1, "Biurko", "opis");
-            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nData dostawy: 09.12.2020\r\nInstrukcja: testowa instrukcja");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 0001\r\nIlość: 15\r\nData dostawy: 09.12.2020\r\nInstrukcja: testowa instrukcja");
 
             //Act
             var aktualna = dostawca.ZlozZamowienie(produkt, 15, new DateTimeOffset(2020, 12, 09, 0, 0, 0, new TimeSpan(8, 0, 0)), "testowa instrukcja");
@@ -146,7 +146,7 @@ namespace UFirm.BLL.Tests
             //Arrange
             var dostawca = new Dostawca();
             var produkt = new Produkt(1, "Biurko", "opis");
-            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 1\r\nIlość: 15\r\nInstrukcja: testowa instrukcja");
+            var oczekiwana = new WynikOperacji(true, "Zamówienie z UFirm\r\nProdukt: Informatyka - 0001\r\nIlość: 15\r\nInstrukcja: testowa instrukcja");
 
             //Act
             var aktualna = dostawca.ZlozZamowienie(produkt, 15, instrukcje: "testowa instrukcja");
@@ -154,6 +154,36 @@ namespace UFirm.BLL.Tests
             //Assert
             Assert.AreEqual(oczekiwana.Sukces, aktualna.Sukces);
             Assert.AreEqual(oczekiwana.Wiadomosc, aktualna.Wiadomosc);
+        }
+        [TestMethod]
+        public void ToStringTest()
+        {
+            //Arrange
+            var dostawca = new Dostawca();
+            dostawca.DostawcaId = 2;
+            dostawca.NazwaFirmy = "UFirm";
+            var oczekiwana = "Dostawca: UFirm";
+            //Act
+            var aktualna = dostawca.ToString();
+            //Assert
+
+            Assert.AreEqual(oczekiwana, aktualna);
+
+
+
+        }
+
+        [TestMethod()]
+        public void ZwrocTekstTest()
+        {
+            //Arrange
+            var dostawca = new Dostawca();
+            var oczekiwana = @"Wstawiam \r\n nowa linia";
+            //Act
+            var aktualna = dostawca.ZwrocTekst();
+            Console.WriteLine(aktualna);
+            //Assert
+            Assert.AreEqual(oczekiwana, aktualna);
         }
     }
 }

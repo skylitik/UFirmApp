@@ -248,7 +248,7 @@ namespace UFirm.BLL.Test
             //Arrange
             var produkt = new Produkt();
             
-            var oczekiwana = "Informatyka - 1";
+            var oczekiwana = "Informatyka - 0001";
 
             //Act
             var aktualna = produkt.KodProduktu;
@@ -262,7 +262,7 @@ namespace UFirm.BLL.Test
             var produkt = new Produkt();
             produkt.Kategoria = "Historia";
             produkt.Numer = 10;
-            var oczekiwana = "Historia - 10";
+            var oczekiwana = "Historia - 0010";
 
             //Act
             var aktualna = produkt.KodProduktu;
