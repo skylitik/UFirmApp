@@ -1,5 +1,6 @@
 ﻿using Ufirm.Common;
 using System;
+using System.Text;
 
 namespace UFirm.BLL
 {
@@ -48,15 +49,19 @@ namespace UFirm.BLL
                 throw new ArgumentOutOfRangeException(nameof(data));
             var sukces = false;
 
-            var tekstZamowienia = "Zamówienie z UFirm" + Environment.NewLine + "Produkt: " + produkt.KodProduktu + Environment.NewLine + "Ilość: " + ilosc;
+            var tekstZamowieniaBuilder = new StringBuilder("Zamówienie z UFirm" + Environment.NewLine + 
+                                                            "Produkt: " + produkt.KodProduktu + Environment.NewLine + 
+                                                            "Ilość: " + ilosc);
             if (data.HasValue)
             {
-                tekstZamowienia += Environment.NewLine + "Data dostawy: " + data.Value.ToString("d");
+                tekstZamowieniaBuilder.Append(Environment.NewLine + "Data dostawy: " + data.Value.ToString("d"));
             }
             if (!string.IsNullOrWhiteSpace(instrukcje))
             {
-                tekstZamowienia += Environment.NewLine + "Instrukcja: " + instrukcje;
+                tekstZamowieniaBuilder.Append(Environment.NewLine + "Instrukcja: " + instrukcje);
+
             }
+            var tekstZamowienia = tekstZamowieniaBuilder.ToString();
 
             var emailService = new EmailService();
             var potwierdzenie = emailService.WyslijWiadomosc("Nowe zamówienie", tekstZamowienia, this.Email);
@@ -107,9 +112,8 @@ namespace UFirm.BLL
         public string ZwrocTekstDwieLinie()
         {
             var tekst = "Pierwsza linia" + Environment.NewLine + "Druga linia";
-            var tekst2 = "Pirwsza linia\r\nDruga linia";
-            var tekst3 = @"Pierwsza linia
-Druga linia";
+           // var tekst2 = "Pirwsza linia\r\nDruga linia";
+           
             return tekst;
         }
         #endregion

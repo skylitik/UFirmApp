@@ -99,7 +99,7 @@ namespace UFirm.BLL
         internal string Kategoria { get; set; }
         public int Numer { get; set; } = 1;
 
-        public string KodProduktu => String.Format("{0} - {1:0000}", this.Kategoria, this.Numer);
+        public string KodProduktu =>$"{this.Kategoria} - {this.Numer:0000}";
         public decimal Koszt { get; set; }
         #endregion
         public string PowiedzWitaj()
